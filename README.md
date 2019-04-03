@@ -1,8 +1,8 @@
-# data augmentation for face images with close eyes, mainly used for face alignment #
+#   #
 
 ## How to use it ##
 To start the program you will have to run a file named eyeSwap.py, which will require:
-  * Python 2.7 (I recommend Anaconda)
+  * Python 2.7
   * OpenCV (I used 2.4.13)
   * Numpy
   * dlib
