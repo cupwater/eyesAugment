@@ -171,7 +171,15 @@ for openeyeImageName in openList:
         warped_im2 = warp_im(closeeyeImg, M, openeyeImg.shape)
         warped_corrected_im2 = correct_colours(openeyeImg, warped_im2, openLandmarks)
         output_im = openeyeImg * (1.0 - combined_mask) + warped_corrected_im2 * combined_mask
+        # rescale value of pixels to avoid overflow when convert it to unit-8
+        min_value = np.min(output_im)
+        max_value = np.max(output_im)
+        output_im = (output_im - min_value) * 255.0 / (max_value-min_value)
+        # print(outout_im)
+        print(np.max(output_im))
+        print(np.min(output_im))
         output_im = output_im.astype(np.uint8)
+
 
         # get the landmarks of transformed images 
         reverse_M = transformation_from_points(closeLandmarks[ALIGN_POINTS], openLandmarks[ALIGN_POINTS])
